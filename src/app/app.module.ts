@@ -4,7 +4,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { myTeamsPage, tournamentPage, TeamHomePage, teamsPage, StandingsPage, teamDetailPage } from '../pages/pages';
+import { myTeamsPage, tournamentPage, TeamHomePage, teamsPage, StandingsPage, teamDetailPage, gamePage } from '../pages/pages';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,7 +18,8 @@ import { EliteApi } from '../shared/shared';
     tournamentPage,
     TeamHomePage,
     StandingsPage,
-    teamDetailPage
+    teamDetailPage,
+    gamePage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,8 @@ import { EliteApi } from '../shared/shared';
     tournamentPage,
     StandingsPage,
     TeamHomePage,
-    teamDetailPage
+    teamDetailPage,
+    gamePage
   ],
   providers: [
     StatusBar,

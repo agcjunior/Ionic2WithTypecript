@@ -1,9 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
+import 'rxjs';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class EliteApi{
-private baseUrl ='https://elite-schedule-app-i2-5ab26.firebaseio.com';
+  private baseUrl ='https://elite-schedule-app-i2-5ab26.firebaseio.com';
+  currentTourney: any = {};
+
   constructor(private http:Http) {}
 
   getTournaments(){
@@ -11,5 +15,17 @@ private baseUrl ='https://elite-schedule-app-i2-5ab26.firebaseio.com';
       this.http.get(`${this.baseUrl}/tournaments.json`)
           .subscribe(res => resolve(res.json()));
     });
+  }
+
+  getTournamentData(tourneyId):Observable<any>{
+    return this.http.get(`${this.baseUrl}/tournaments-data/${tourneyId}.json`)
+    .map((respose: Response) => {
+    this.currentTourney =respose.json();
+    return this.currentTourney;
+    });
+  }
+
+  getCurrentTourney() {
+    return this.currentTourney;
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { LoadingController, NavController } from 'ionic-angular';
 import { myTeamsPage, teamsPage } from '../pages';
 import {EliteApi} from '../../shared/shared';
 
@@ -10,7 +10,9 @@ export class tournamentPage {
 
   tournaments:any;
 
-  constructor(private nav: NavController, private eliteApi : EliteApi) {
+  constructor(private nav: NavController,
+     private eliteApi : EliteApi,
+     private loadingController:LoadingController) {
 
   }
 
@@ -19,8 +21,17 @@ export class tournamentPage {
   }
 
   ionViewDidLoad() {
-    this.eliteApi.getTournaments().then(data => this.tournaments = data);
+    let loader= this.loadingController.create({
+      content:'Getting tournaments',
+      spinner:'dots'
+    });
 
+    loader.present().then(() => {
+      this.eliteApi.getTournaments().then(data => {
+      this.tournaments = data;
+      loader.dismiss();
+      });
+    });
   }
 
 }
